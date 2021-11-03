@@ -7,6 +7,11 @@ const app = Vue.createApp({
       name: 'András',
     };
   },
+  watch: {
+    name(value){
+      console.log('watcher function for name property called because name changed to', value);
+    }
+  },
   computed: { // methods to display data that doesn't need to be recalculated every time
     fullName(){ // consider methods just as like data properties
       return this.name==='András'?'András Default':'András ' + this.name;
@@ -14,7 +19,7 @@ const app = Vue.createApp({
 
   }, 
   methods: { // recalculated every time something changes on the page
-    submitForm(event) {
+    submitForm(event, otherArgument) { // use $event to access if other argumetns are used
       // event.preventDefault(); // to prevent reload page when submit is pressed
       this.name = event.target.elements.nameInput.value;
       alert('Submitted = ' + this.name);
