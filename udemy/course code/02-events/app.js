@@ -8,8 +8,9 @@ const app = Vue.createApp({
     };
   },
   watch: {
-    name(value){
-      console.log('watcher function for name property called because name changed to', value);
+    name(newValue, oldValue){
+      console.log('watcher function for name property called because name changed');
+      console.log('old value = ', oldValue, ' new value = ', newValue);
     }
   },
   computed: { // methods to display data that doesn't need to be recalculated every time

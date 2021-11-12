@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics - Styling</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Vue Dynamic Styling</h1>
+    </header>
+    <section id="styling">
+      <div @click="toggleSelect('A')" class="demo" :class="{active: isActiveA}">
+        Class bind with json property:true/false syntax
+      </div>
+      <div @click="toggleSelect('A')" class="demo" :class="classAcomputed">
+        Class bind with Computed Class
+      </div>
+      <div @click="toggleSelect('B')" :class="['demo', {active: isActiveB}]">
+        Class bind with Array syntax
+      </div>
+      <div
+        @click="toggleSelect('C')"
+        class="demo"
+        :style="{borderColor: isActiveC? 'red':'#ccc'
+      , backgroundColor: isActiveC? 'salmon': 'white'}"
+      >
+        Class bind with Inline style
+      </div>
+    </section>
+  </body>
+</html>
