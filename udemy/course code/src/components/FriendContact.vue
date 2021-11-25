@@ -1,6 +1,6 @@
 <template>
   <li>
-    <h2>{{ name }} {{ isFavoriteInComponent === "1" ? "(Favorite)" : "" }}</h2>
+    <h2>{{ name }} {{ isFavoriteFromParentProp ? "(Favorite)" : "" }}</h2>
     <button @click="toggleFavorite">Toggle Favorite</button>
     <button @click="toggleVisible">
       {{ detailsVisible ? "Hide" : "Show" }} details
@@ -19,6 +19,10 @@ export default {
   // props with validation
   props: {
     name: String,
+    id: {
+      type: String,
+      required: true,
+    },
     phoneNumber: {
       type: String,
       required: true,
@@ -28,18 +32,17 @@ export default {
       required: true,
     },
     isFavoriteFromParentProp: {
-      type: String,
+      type: Boolean,
       required: false,
-      default: "0", // if no value provided
+      default: false, // if no value provided
       validator: function (value) {
-        return value === "0" || value === "1"; //return true if valid, false if not
+        return value === true || value === false;
       },
     },
   },
   data() {
     return {
       detailsVisible: true,
-      isFavoriteInComponent: this.isFavoriteFromParentProp,
     };
   },
   methods: {
@@ -47,11 +50,9 @@ export default {
       this.detailsVisible = !this.detailsVisible;
     },
     toggleFavorite() {
-      if (this.isFavoriteInComponent === "1") {
-        this.isFavoriteInComponent = "0";
-      } else {
-        this.isFavoriteInComponent = "1";
-      }
+      // This is to send event back to parent
+      // this.id is available as it was provided by the parent
+      this.$emit("toggle-favorite-event-emitted", this.id);
     },
   },
 };

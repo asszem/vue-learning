@@ -4,21 +4,16 @@
       <h1>My Friends</h1>
     </header>
     <ul>
-      <friend-component
-        name="Andras Hardcoded"
-        phone-number="1234 56789"
-        email-address="andras@hey.com"
-		is-favorite-from-parent-prop="1"
-      ></friend-component>
-    </ul>
-    <ul>
       <li>
         <friend-component
           v-for="friend in friends"
+          @toggle-favorite-event-emitted="toggleFavorite"
           :key="friend.id"
+          :id="friend.id"
           :name="friend.name"
           :phone-number="friend.phone"
           :email-address="friend.email"
+          :is-favorite-from-parent-prop="friend.isFavorite"
         ></friend-component>
       </li>
     </ul>
@@ -36,15 +31,25 @@ export default {
           name: "Andras Olah",
           phone: "0123 45454",
           email: "andras1@alma.com",
+          isFavorite: true,
         },
         {
           id: "andras2",
           name: "Oláh András",
           phone: "9999 0123 45454",
           email: "andras2@alma.com",
+          isFavorite: false,
         },
       ],
     };
+  },
+  methods: {
+    toggleFavorite(friendID) {
+      console.log("toggleFavorite called for = ", friendID);
+      let identifiedFriend = this.friends.find((x) => x.id === friendID);
+      console.log("item to be changed = ", identifiedFriend);
+      identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
+    },
   },
 };
 </script>
