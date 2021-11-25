@@ -3,12 +3,12 @@
     <header>
       <h1>My Friends</h1>
     </header>
-	<p>Conditional list rendering</p>
     <ul>
       <friend-component
-        name="Andras"
+        name="Andras Hardcoded"
         phone-number="1234 56789"
         email-address="andras@hey.com"
+		is-favorite-from-parent-prop="1"
       ></friend-component>
     </ul>
     <ul>
@@ -21,8 +21,6 @@
           :email-address="friend.email"
         ></friend-component>
       </li>
-
-      <li></li>
     </ul>
   </section>
 </template>
