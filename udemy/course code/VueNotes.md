@@ -1,11 +1,14 @@
 # General concepts
 
 ## Basic setup
+
 ### Old way
+
 - Create an object with Vue.createApp method
 - Mount that object to a html identifier of the page<br>
   <code> app.mount('#htmlIdentifier')</code>
 - That part of the page will be handled by Vue
+
 ### New way
 
 ## CreateApp parts - configuration options
@@ -19,12 +22,13 @@
   - the latest value of the watched property is automatically passed
 
 ## built in methods (start with $sign)
+
 - $emit
-	- This can be called from inside a Vue component for a custom event that will be listened in the parent component
-	- <code>this.$emit('event-name'), </code>
-		- First argument is the name of the event, kebab-case is convention
-		- Any other arguments can be passed, as data related to the emitted event
-	- The parent app can listen to this event with the v-on or @ shorthand, followed by the event name
+  - This can be called from inside a Vue component for a custom event that will be listened in the parent component
+  - <code>this.$emit('event-name'), </code>
+    - First argument is the name of the event, kebab-case is convention
+    - Any other arguments can be passed, as data related to the emitted event
+  - The parent app can listen to this event with the v-on or @ shorthand, followed by the event name
 
 ## v-Directives
 
