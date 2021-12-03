@@ -3,6 +3,7 @@
     <header>
       <h1>My Friends</h1>
     </header>
+    <add-new-friend @submit-friend="addNewFriend" />
     <ul>
       <li>
         <friend-component
@@ -27,17 +28,17 @@ export default {
     return {
       friends: [
         {
-          id: "andras1",
-          name: "Andras Olah",
+          id: "Donald",
+          name: "Donald",
           phone: "0123 45454",
           email: "andras1@alma.com",
           isFavorite: true,
         },
         {
-          id: "andras2",
-          name: "Oláh András",
-          phone: "9999 0123 45454",
-          email: "andras2@alma.com",
+          id: "andras1",
+          name: "Andras Olah",
+          phone: "0123 45454",
+          email: "andras1@alma.com",
           isFavorite: false,
         },
       ],
@@ -49,6 +50,17 @@ export default {
       let identifiedFriend = this.friends.find((x) => x.id === friendID);
       console.log("item to be changed = ", identifiedFriend);
       identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
+    },
+    addNewFriend(payload) {
+      console.log("Inside App.vue - Add New Friend called", payload.friendName.value);
+      const newFriend = {
+        id: payload.friendName.value,
+        name: payload.friendName.value,
+        phone: payload.phone.value,
+        email: payload.email.value,
+        isVaforite: false
+      }
+      this.friends.push(newFriend);
     },
   },
 };

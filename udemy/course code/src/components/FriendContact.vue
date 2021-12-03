@@ -43,14 +43,14 @@ export default {
   // emits: ['toggle-favorite-emit']
   emits: {
     // this is an event, that  should be handled by a function that expects an id argument
-    'toggle-favorite-event-emitted': function (id) {
+    "toggle-favorite-event-emitted": function (id) {
       // validations can be added here
-        console.log(('emitted ID = ', id));
+      console.log(("emitted ID = ", id));
       if (id) {
-        console.log(('emitted ID = ', id));
+        console.log(("emitted ID = ", id));
         return true;
       } else {
-        console.log('Error! ID is missing');
+        console.log("Error! ID is missing");
         return false;
       }
     },
@@ -67,7 +67,7 @@ export default {
     toggleFavorite() {
       // This is to send event back to parent
       // this.id is available as it was provided by the parent
-      this.$emit('toggle-favorite-event-emitted', this.id);
+      this.$emit("toggle-favorite-event-emitted", this.id);
     },
   },
 };
