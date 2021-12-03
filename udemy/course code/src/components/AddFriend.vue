@@ -1,45 +1,68 @@
 <template>
-  <div id="addFriend">
+  <div>
     <h2>Add new friend</h2>
     <form
-      name="addFriendForm"
-      @submit="submitNewFriend"
-      @submit.prevent="addFriendForm"
+        name="addFriendForm"
+        @submit="submitNewFriend"
+        @submit.prevent="addFriendForm"
     >
-      <p>
-        Name:
-        <input type="text" name="friendName" />
-      </p>
-      <p>
-        Phone number:
-        <input type="text" name="phone" />
-      </p>
-      <p>
-        Email:
-        <input type="text" name="email" />
-      </p>
-      <button type="submit">Add Friend</button>
+      <div>
+        <label>
+          Name:
+        </label>
+        <input type="text" v-model="newFriend.name"/>
+      </div>
+      <div>
+        <label>
+          Phone number:
+        </label>
+        <input type="text" v-model="newFriend.phone"/>
+      </div>
+      <div>
+        <label>Email:</label>
+        <input type="text" v-model="newFriend.email"/>
+      </div>
+      <div>
+        <button type="submit">Add Friend</button>
+      </div>
     </form>
   </div>
 </template>
 
 <script>
 export default {
-  // emits: ["submit-friend"],
+  data() {
+    return {
+      newFriend: {
+        name: '',
+        phone: '',
+        email: '',
+      }
+    }
+  },
+  emits: ["submit-friend"],
   methods: {
-    submitNewFriend(event) {
-      console.log("InsideAddFriend.vue submint new friend presed");
-      // console.log('name = ', event.target.elements.friendName.value)
-      this.$emit("submit-friend", event.target.elements);
+    submitNewFriend() {
+      this.$emit("submit-friend", this.newFriend);
     },
   },
 };
 </script>
 
 <style>
-div#addFriend {
-  background-color: rebeccapurple;
-  align-content: center;
-  text-align: center;
+#app input {
+  font: inherit;
+  padding: 0.15rem;
+}
+
+#app label {
+  font-weight: bold;
+  margin-right: 1rem;
+  width: 7rem;
+  display: inline-block;
+}
+
+#app form div {
+  margin: 1rem 0;
 }
 </style>

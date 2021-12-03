@@ -3,18 +3,20 @@
     <header>
       <h1>My Friends</h1>
     </header>
-    <add-new-friend @submit-friend="addNewFriend" />
     <ul>
       <li>
+      <add-new-friend @submit-friend="addNewFriend"/>
+      </li>
+      <li>
         <friend-component
-          v-for="friend in friends"
-          @toggle-favorite-event-emitted="toggleFavorite"
-          :key="friend.id"
-          :id="friend.id"
-          :name="friend.name"
-          :phone-number="friend.phone"
-          :email-address="friend.email"
-          :is-favorite-from-parent-prop="friend.isFavorite"
+            v-for="friend in friends"
+            @toggle-favorite-event-emitted="toggleFavorite"
+            :key="friend.id"
+            :id="friend.id"
+            :name="friend.name"
+            :phone-number="friend.phone"
+            :email-address="friend.email"
+            :is-favorite-from-parent-prop="friend.isFavorite"
         ></friend-component>
       </li>
     </ul>
@@ -52,14 +54,15 @@ export default {
       identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
     },
     addNewFriend(payload) {
-      console.log("Inside App.vue - Add New Friend called", payload.friendName.value);
+      console.log("Inside App.vue - Add New Friend called", payload);
       const newFriend = {
-        id: payload.friendName.value,
-        name: payload.friendName.value,
-        phone: payload.phone.value,
-        email: payload.email.value,
-        isVaforite: false
+        id: new Date().toISOString(),
+        name: payload.name,
+        phone: payload.phone,
+        email: payload.email,
+        isFaforite: false
       }
+      console.log(newFriend)
       this.friends.push(newFriend);
     },
   },
