@@ -5,12 +5,13 @@
     </header>
     <ul>
       <li>
-      <add-new-friend @submit-friend="addNewFriend"/>
+        <add-new-friend @submit-friend="addNewFriend"/>
       </li>
       <li>
         <friend-component
             v-for="friend in friends"
             @toggle-favorite-event-emitted="toggleFavorite"
+            @delete-friend="deleteFriend"
             :key="friend.id"
             :id="friend.id"
             :name="friend.name"
@@ -65,6 +66,11 @@ export default {
       console.log(newFriend)
       this.friends.push(newFriend);
     },
+    deleteFriend(id) {
+      console.log('Friend ID to be deleted', id)
+      const index=this.friends.find(id => id===id);
+      this.friends.splice(index, 1);
+    }
   },
 };
 </script>

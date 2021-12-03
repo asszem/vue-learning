@@ -9,6 +9,7 @@
       <li><strong>Phone:</strong> {{ phoneNumber }}</li>
       <li><strong>Email:</strong> {{ emailAddress }}</li>
     </ul>
+    <button @click="deleteFriend">Delete</button>
   </li>
 </template>
 
@@ -54,6 +55,10 @@ export default {
         return false;
       }
     },
+    "delete-friend": function (id) {
+      console.log('ID to be deleted = ', id)
+      return true;
+    },
   },
   data() {
     return {
@@ -69,6 +74,9 @@ export default {
       // this.id is available as it was provided by the parent
       this.$emit("toggle-favorite-event-emitted", this.id);
     },
+    deleteFriend() {
+      this.$emit("delete-friend", this.id)
+    }
   },
 };
 </script>
