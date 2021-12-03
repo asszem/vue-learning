@@ -6,10 +6,13 @@
       {{ detailsVisible ? "Hide" : "Show" }} details
     </button>
     <ul v-if="detailsVisible">
-      <li><strong>Phone:</strong> {{ phoneNumber }}</li>
+      <li><strong>Phone Number:</strong> {{ phoneNumber }}
+        <br>
+        {{ getPhone(phoneType)[0].type }}
+      </li>
       <li><strong>Email:</strong> {{ emailAddress }}</li>
     </ul>
-    <button @click="deleteFriend">Delete</button>
+    <button @click="$emit('delete-friend', this.id)">Delete</button>
   </li>
 </template>
 
@@ -40,6 +43,10 @@ export default {
         return value === true || value === false;
       },
     },
+    phoneType: {
+      type: Number,
+      required: true,
+    },
   },
   // emits: ['toggle-favorite-emit']
   emits: {
@@ -65,6 +72,8 @@ export default {
       detailsVisible: true,
     };
   },
+  // this must come from an ancestor element with provide
+  inject: ['phones'],
   methods: {
     toggleVisible() {
       this.detailsVisible = !this.detailsVisible;
@@ -74,9 +83,9 @@ export default {
       // this.id is available as it was provided by the parent
       this.$emit("toggle-favorite-event-emitted", this.id);
     },
-    deleteFriend() {
-      this.$emit("delete-friend", this.id)
-    }
+    getPhone(id) {
+      return this.phones.filter(phone => phone.id === id); // return only the matching phone
+    },
   },
 };
 </script>

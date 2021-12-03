@@ -16,6 +16,7 @@
             :id="friend.id"
             :name="friend.name"
             :phone-number="friend.phone"
+            :phone-type="friend.phoneType"
             :email-address="friend.email"
             :is-favorite-from-parent-prop="friend.isFavorite"
         ></friend-component>
@@ -34,6 +35,7 @@ export default {
           id: "Donald",
           name: "Donald",
           phone: "0123 45454",
+          phoneType:1,
           email: "andras1@alma.com",
           isFavorite: true,
         },
@@ -41,21 +43,37 @@ export default {
           id: "andras1",
           name: "Andras Olah",
           phone: "0123 45454",
+          phoneType:2,
           email: "andras1@alma.com",
           isFavorite: false,
-        },
+        }
       ],
+      phones: [
+        {
+          id: 1,
+          type: 'iPhone',
+          color: 'Black'
+        },
+        {
+          id: 2,
+          type: 'Android',
+          color: 'Red'
+        }
+      ],
+    };
+  },
+  // This can be reached in any child element using the inject configuration key
+  provide() {
+    return {
+      phones: this.phones
     };
   },
   methods: {
     toggleFavorite(friendID) {
-      console.log("toggleFavorite called for = ", friendID);
       let identifiedFriend = this.friends.find((x) => x.id === friendID);
-      console.log("item to be changed = ", identifiedFriend);
       identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
     },
     addNewFriend(payload) {
-      console.log("Inside App.vue - Add New Friend called", payload);
       const newFriend = {
         id: new Date().toISOString(),
         name: payload.name,
@@ -63,15 +81,30 @@ export default {
         email: payload.email,
         isFaforite: false
       }
-      console.log(newFriend)
       this.friends.push(newFriend);
     },
     deleteFriend(id) {
-      console.log('Friend ID to be deleted', id)
-      const index=this.friends.find(id => id===id);
-      this.friends.splice(index, 1);
+      // Deleting an object from an array based on key value with finding the object index and then array.splice
+      // const index=this.friends.find(id => id===id);
+      // this.friends.splice(index, 1);
+
+      // Deleting an object by using filter
+      this.friends = this.friends.filter(friend => friend.id !== id);
     }
   },
+  mounted() {
+    setTimeout(() => {
+      const autoFriend = {
+        id: new Date().toISOString(),
+        name: 'Auto Friend',
+        phone: '00000 00000',
+        phoneType: 1,
+        email: 'auto@auto.com',
+        isFavorite: false
+      }
+      this.friends.push(autoFriend);
+    }, 3000)
+  }
 };
 </script>
 
